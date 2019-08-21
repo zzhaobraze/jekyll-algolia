@@ -20,12 +20,12 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 2.3.0'
 
   # Dependencies
-  gem.add_runtime_dependency 'algolia_html_extractor', '~> 2.6'
-  gem.add_runtime_dependency 'algoliasearch', '~> 1.18'
+
+  gem.add_runtime_dependency 'algoliasearch', '1.26.1'
   gem.add_runtime_dependency 'filesize', '~> 0.1'
   gem.add_runtime_dependency 'jekyll', '~> 3.0'
   gem.add_runtime_dependency 'json', '~> 2.0'
-  gem.add_runtime_dependency 'nokogiri', '~> 1.6'
+  gem.add_runtime_dependency 'nokogiri', '~> 1.10.4'
   gem.add_runtime_dependency 'progressbar', '~> 1.9'
   gem.add_runtime_dependency 'verbal_expressions', '~> 0.1.5'
 

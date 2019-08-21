@@ -209,6 +209,7 @@ module Jekyll
       def self.verbose?
         value = get('verbose')
         return true if value == true
+
         false
       end
 
@@ -218,6 +219,7 @@ module Jekyll
       def self.dry_run?
         value = get('dry_run')
         return true if value == true
+
         false
       end
 
@@ -228,6 +230,7 @@ module Jekyll
       def self.force_settings?
         value = get('force_settings')
         return true if value == true
+
         false
       end
 
@@ -238,6 +241,7 @@ module Jekyll
       def self.extensions_to_index
         extensions = algolia('extensions_to_index')
         return [] if extensions.nil?
+
         extensions = extensions.split(',') if extensions.is_a? String
         extensions
       end
@@ -246,7 +250,7 @@ module Jekyll
       # with the indexing
       # Note that if other jekyll plugins are defined as part of the
       # :jekyll_plugins group in the Gemfile, we might be able to override them
-      # using .load_overwrites in  .load_overwrites in jekyll-algolia.rb.
+      # using .load_overwrites in jekyll-algolia.rb.
       # If they are simply required in Gemfile, then we might need to revert
       # their values to nil values from here
       def self.disable_other_plugins(config)
@@ -259,6 +263,10 @@ module Jekyll
         # Disable pagination for jekyll-paginate-v2
         config['pagination'] = {} unless config['pagination'].is_a?(Hash)
         config['pagination']['enabled'] = false
+
+        # Disable autopages for jekyll-paginate-v2
+        config['autopages'] = {} unless config['autopages'].is_a?(Hash)
+        config['autopages']['enabled'] = false
 
         # Disable tags from jekyll-tagging
         config['tag_page_dir'] = nil
