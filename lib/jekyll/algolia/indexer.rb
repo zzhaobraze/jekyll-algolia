@@ -258,8 +258,8 @@ module Jekyll
             ::Algolia.batch!(slice)
 
             progress_bar.increment if should_have_progress_bar
-          rescue StandardError => error
-            ErrorHandler.stop(error, operations: slice)
+          rescue StandardError => e
+            ErrorHandler.stop(e, operations: slice)
           end
         end
       end
@@ -296,6 +296,8 @@ module Jekyll
       # If the settingID are not matching, it means our config is different, so
       # we push it, overriding the settingID for next push.
       def self.update_settings
+        return if Configurator.settings.empty?
+
         current_remote_settings = remote_settings || {}
         remote_setting_id = current_remote_settings.dig('userData', 'settingID')
 
@@ -338,8 +340,8 @@ module Jekyll
       # rubocop:disable Naming/AccessorMethodName
       def self.set_settings(settings)
         index.set_settings!(settings)
-      rescue StandardError => error
-        ErrorHandler.stop(error, settings: settings)
+      rescue StandardError => e
+        ErrorHandler.stop(e, settings: settings)
       end
       # rubocop:enable Naming/AccessorMethodName
 
