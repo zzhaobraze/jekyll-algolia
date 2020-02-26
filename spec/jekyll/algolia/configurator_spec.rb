@@ -306,6 +306,15 @@ describe(Jekyll::Algolia::Configurator) do
       it { should include('attributeForDistinct' => 'title') }
       it { should include('customRanking' => ['asc(foo)', 'desc(bar)']) }
     end
+    context 'with settings false' do
+      before do
+        allow(current)
+          .to receive(:algolia)
+          .with('settings')
+          .and_return(false)
+      end
+      it { should be_empty }
+    end
   end
 
   describe 'dry_run?' do
@@ -435,11 +444,11 @@ describe(Jekyll::Algolia::Configurator) do
     subject { current.disable_other_plugins(config) }
 
     context 'disable jekyll-archives' do
-      it { should include('jekyll-archives' => nil) }
+      it { should_not include('jekyll-archives') }
     end
 
     context 'disable jekyll-paginate' do
-      it { should include('paginate' => nil) }
+      it { should_not include('paginate') }
     end
 
     context 'disable jekyll-paginate-v2' do
@@ -472,8 +481,8 @@ describe(Jekyll::Algolia::Configurator) do
     end
 
     context 'disable jekyll-tagging' do
-      it { should include('tag_page_dir' => nil) }
-      it { should include('tag_page_layout' => nil) }
+      it { should_not include('tag_page_dir') }
+      it { should_not include('tag_page_layout') }
     end
   end
 end

@@ -9,10 +9,10 @@ Gem::Specification.new do |gem|
   gem.version = Jekyll::Algolia::VERSION
 
   # Recommended attributes
-  gem.authors = ['Tim Carry']
+  gem.authors = ['Tim Carry', 'Sylvain Utard']
   gem.description = 'Index all your content into Algolia by '\
     'running `jekyll algolia`'
-  gem.email = 'tim@pixelastic.com'
+  gem.email = 'support@algolia.com'
   gem.homepage = 'https://github.com/algolia/jekyll-algolia'
   gem.licenses = ['MIT']
 
@@ -20,12 +20,11 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 2.3.0'
 
   # Dependencies
-
   gem.add_runtime_dependency 'algoliasearch', '1.26.1'
   gem.add_runtime_dependency 'filesize', '~> 0.1'
-  gem.add_runtime_dependency 'jekyll', '~> 3.0'
+  gem.add_runtime_dependency 'jekyll', '>= 3.6', '< 5.0'
   gem.add_runtime_dependency 'json', '~> 2.0'
-  gem.add_runtime_dependency 'nokogiri', '~> 1.10.4'
+  gem.add_runtime_dependency 'nokogiri', '~> 1.10.8'
   gem.add_runtime_dependency 'progressbar', '~> 1.9'
   gem.add_runtime_dependency 'verbal_expressions', '~> 0.1.5'
 

@@ -149,7 +149,7 @@ describe(Jekyll::Algolia::Indexer) do
             hash_including(
               distinct: false, # To get the correct number of records
               hitsPerPage: 1, # To get a short response
-              attributesToRetrieve: 'objectID', # To get a short response
+              attributesToRetrieve: 'objectID' # To get a short response
             )
           )
           .and_return('nbHits' => nb_hits)
@@ -632,6 +632,9 @@ describe(Jekyll::Algolia::Indexer) do
     let(:pluginVersion) { nil }
     let(:diff_keys) { nil }
     let(:force_settings) { nil }
+    let(:settings) do
+      Jekyll::Algolia::Configurator::ALGOLIA_DEFAULTS['settings'].merge({})
+    end
 
     before do
       stub_const('Jekyll::Algolia::VERSION', pluginVersion)
@@ -639,6 +642,9 @@ describe(Jekyll::Algolia::Indexer) do
       allow(configurator)
         .to receive(:force_settings?)
         .and_return(force_settings)
+      allow(configurator)
+        .to receive(:settings)
+        .and_return(settings)
       allow(current).to receive(:set_settings)
       allow(current).to receive(:warn_of_manual_dashboard_editing)
       allow(current).to receive(:local_setting_id).and_return(local_setting_id)
@@ -743,6 +749,15 @@ describe(Jekyll::Algolia::Indexer) do
       let(:local_setting_id) { 'foo' }
       let(:remote_settings) { { 'userData' => { 'settingID' => 'bar' } } }
       let(:dry_run) { true }
+      it do
+        expect(current).to_not have_received(:set_settings)
+      end
+    end
+
+    describe 'should not update settings if user configured false' do
+      let(:local_setting_id) { 'foo' }
+      let(:settings) { {} }
+      let(:remote_settings) { {} }
       it do
         expect(current).to_not have_received(:set_settings)
       end
