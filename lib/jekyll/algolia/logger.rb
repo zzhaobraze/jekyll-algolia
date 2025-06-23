@@ -78,9 +78,9 @@ module Jekyll
         )
 
         # Convert all variables
-        content = File.open(file).read
+        content = File.open(file).read.force_encoding('UTF-8')
         metadata.each do |key, value|
-          content = content.gsub("{#{key}}", value.to_s)
+          content = content.gsub("{#{key}}", value.to_s.force_encoding('UTF-8'))
         end
 
         # Display each line differently
